@@ -2,7 +2,7 @@
 
 Bitácora de mantenimiento de vehículos del usuario (Mazda 2 y otros): un único
 archivo HTML autocontenido (`Bitacora-Vehiculo.html`) con cuenta regresiva en
-vivo, recordatorios por fecha/kilometraje, gastos y 4 temas visuales. Todo el
+vivo, recordatorios por fecha/kilometraje, gastos y 5 temas visuales (azul, esmeralda, amoled, claro, papel). Todo el
 HTML, CSS y JS vive en ese archivo — sin build, sin framework, sin `package.json`.
 
 ## Arquitectura (desde 2026-10-08)
@@ -51,3 +51,10 @@ mala, edición manual en la hoja, fotos, varios vehículos, borrado). Para repet
 levanta un servidor que sirva el HTML y simule `POST /exec`, apunta
 `localStorage['bitacora-cloud']` a él y revisa la consola (sin errores).
 Además: alternar los 4 temas y abrir un `.ics` exportado.
+
+## Tema "Papel" (2026-10-08)
+Inspirado en DESIGN.md (estilo cartel crema + azul, plano, píldoras solo con contorno, serif en el título),
+adaptado a app móvil: acento #0060E0 (algo más oscuro que #006eff para contraste ≥4.5 sobre crema), texto de
+peso normal (no 300), rojo/verde/ámbar de estado conservados porque son funcionales, fuentes libres
+(Inter + Cormorant Garamond) en lugar de las comerciales Editorial New / Founders Grotesk. No copiar marca ni
+ilustraciones de "Drive Capital". Se define con `[data-theme="papel"]` (variables + bloque de overrides).

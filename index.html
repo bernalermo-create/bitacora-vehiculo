@@ -10,7 +10,7 @@
 <link rel="icon" href="icons/icon-192.png">
 <link rel="apple-touch-icon" href="icons/icon-192.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@300;400;500;600&family=Cormorant+Garamond:wght@500;600&display=swap" rel="stylesheet">
 <style>
   :root{
     --bg:#10141A;
@@ -86,6 +86,56 @@
     --surface-deep:#EDF1F5;
     --glow-1:#DCEEFB;
   }
+  [data-theme="papel"]{
+    --bg:#FFF8F1;
+    --panel:#FFF8F1;
+    --panel-2:#FBEFE2;
+    --line:#E2E8F0;
+    --line-soft:#ECF0F5;
+    --text:#000000;
+    --text-dim:#4A5260;
+    --text-faint:#6B7382;
+    --green:#0A7A4B;
+    --green-dim:#E3F3EA;
+    --amber:#9A5B00;
+    --amber-dim:#FDEBC8;
+    --red:#C62828;
+    --red-dim:#FDE4E0;
+    --red-line:#F1B8B0;
+    --accent:#0060E0;
+    --accent-dim:#EAF1FF;
+    --accent-line:#0060E0;
+    --accent-rgb:0,96,224;
+    --accent-grad-1:#0060E0;
+    --accent-grad-2:#0060E0;
+    --accent-ink:#FFF8F1;
+    --surface-deep:#FBEFE2;
+    --glow-1:#FFF8F1;
+    --radius:0px;
+    --radius-sm:0px;
+  }
+  /* Papel: superficies planas (sin sombras ni degradados), botones en píldora con solo contorno, serif en el título */
+  [data-theme="papel"] body{font-family:'Inter',ui-sans-serif,system-ui,sans-serif;letter-spacing:-.01em;}
+  [data-theme="papel"] .mono,[data-theme="papel"] .ch-time,[data-theme="papel"] .card-countdown,
+  [data-theme="papel"] .tile .t-num,[data-theme="papel"] .card-meta b,[data-theme="papel"] .odo-value,
+  [data-theme="papel"] .radar-chip .rc-sub,[data-theme="papel"] .bh-top b{font-family:'Inter',ui-sans-serif,system-ui,sans-serif;font-variant-numeric:tabular-nums;}
+  [data-theme="papel"] .plate-title{font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:30px;letter-spacing:-.02em;line-height:1.05;}
+  [data-theme="papel"] .plate,[data-theme="papel"] .countdown-hero,[data-theme="papel"] .countdown-hero.urgent{background:var(--panel);box-shadow:none;}
+  [data-theme="papel"] .countdown-hero.urgent{border-color:var(--red);}
+  [data-theme="papel"] .plate::before{display:none;}
+  [data-theme="papel"] .dot{box-shadow:none !important;}
+  [data-theme="papel"] .btn,[data-theme="papel"] .mini-btn,[data-theme="papel"] .export-btn,[data-theme="papel"] .filter-btn,
+  [data-theme="papel"] .veh-tab,[data-theme="papel"] .odo-edit,[data-theme="papel"] .icon-btn,[data-theme="papel"] .radar-chip{border-radius:60px;}
+  [data-theme="papel"] .btn-primary{background:transparent;color:var(--accent);border:1.5px solid var(--accent);}
+  [data-theme="papel"] .btn-danger{background:transparent;color:var(--red);border:1.5px solid var(--red);}
+  [data-theme="papel"] .btn-ghost,[data-theme="papel"] .mini-btn,[data-theme="papel"] .icon-btn{background:transparent;}
+  [data-theme="papel"] .export-btn,[data-theme="papel"] .odo-edit,[data-theme="papel"] .filter-btn.active,[data-theme="papel"] .veh-tab.active,
+  [data-theme="papel"] .mini-btn.cal{background:transparent;border:1.5px solid var(--accent);color:var(--accent);}
+  [data-theme="papel"] .fab{background:var(--bg);color:var(--accent);border:1.5px solid var(--accent);box-shadow:none;}
+  [data-theme="papel"] .bv-bar,[data-theme="papel"] .bh-fill{background:var(--accent);}
+  [data-theme="papel"] .overlay{background:rgba(40,36,30,.32);backdrop-filter:none;}
+  [data-theme="papel"] .sheet{border-radius:0;}
+  [data-theme="papel"] .toast{background:#000;color:#FFF8F1;border-color:#000;}
   *{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
   html,body{margin:0;padding:0;background:var(--bg);color:var(--text);}
   body{
@@ -360,6 +410,7 @@ const THEMES = [
   {id:'esmeralda', name:'Oscuro Esmeralda', colors:['#10141A','#34D9A0','#1A2128']},
   {id:'amoled', name:'AMOLED Negro', colors:['#000000','#57C7FF','#0A0A0A']},
   {id:'claro', name:'Claro', colors:['#F3F5F7','#0B84C4','#FFFFFF']},
+  {id:'papel', name:'Papel', colors:['#FFF8F1','#0060E0','#E2E8F0']},
 ];
 function getTheme(){ try{ return localStorage.getItem('bitacora-theme')||'azul'; }catch(e){ return 'azul'; } }
 function setTheme(id){
