@@ -5,6 +5,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 <title>Bitácora de vehículo</title>
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#10141A">
+<link rel="icon" href="icons/icon-192.png">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
@@ -443,6 +447,7 @@ function vehTitle(v){
    Copia manual en JSON como red de seguridad. */
 const LS_KEY = 'bitacora-vehiculo-v1';   // misma clave de siempre: los datos locales existentes se migran solos
 const CLOUD_KEY = 'bitacora-cloud';
+const DEFAULT_CLOUD_URL = 'https://script.google.com/macros/s/AKfycbxoUrFe9-9t_YkKuLTGpu4ZTcbXX9rF5yZaV7IcetrpXaxYGmOWrXqgjxVY9F0HMO8/exec'; // solo la URL; la clave nunca va en el código
 const DIRTY_KEY = 'bitacora-dirty';
 let saveOk = true;
 
@@ -580,8 +585,8 @@ function openCloudSheet(){
     <div class="sheet-handle"></div>
     <h2 class="sheet-title">Nube (Google Sheets) <button class="icon-btn" id="closeSheet">${ICONS.close}</button></h2>
     <p class="hint-p">Tus datos se guardan en una hoja de Google y se comparten entre todos tus dispositivos. Instrucciones de instalación al inicio del archivo <b>apps-script/Code.gs</b>.</p>
-    <div class="field"><label>URL de la aplicación web (termina en /exec)</label><input id="c_url" inputmode="url" autocapitalize="off" value="${esc(cloud?cloud.url:'')}" placeholder="https://script.google.com/macros/s/…/exec"></div>
-    <div class="field"><label>Clave</label><input id="c_key" type="password" autocapitalize="off" value="${esc(cloud?cloud.key:'')}"></div>
+    ${DEFAULT_CLOUD_URL ? `<input id="c_url" type="hidden" value="${esc(DEFAULT_CLOUD_URL)}">` : `<div class="field"><label>URL de la aplicación web (termina en /exec)</label><input id="c_url" inputmode="url" autocapitalize="off" value="${esc(cloud?cloud.url:'')}" placeholder="https://script.google.com/macros/s/…/exec"></div>`}
+    <div class="field"><label>Contraseña</label><input id="c_key" type="password" autocomplete="current-password" autocapitalize="off" value="${esc(cloud?cloud.key:'')}"></div>
     <div class="sheet-actions">
       ${cloud? `<button class="btn btn-danger" id="btnCloudOff">Desconectar</button>`:''}
       <button class="btn btn-primary" id="btnCloudOn">${cloud?'Guardar':'Conectar'}</button>
@@ -1324,6 +1329,7 @@ document.getElementById('fabAdd').onclick = ()=>openRecordSheet(null);
 
 loadState();
 setInterval(tickCountdowns, 60000);
+if('serviceWorker' in navigator && location.protocol.startsWith('http')) navigator.serviceWorker.register('sw.js').catch(()=>{});
 </script>
 </body>
 </html>

@@ -34,7 +34,10 @@ function doPost(e){
   let out;
   try{
     const req = JSON.parse(e.postData.contents);
-    if(!CLAVE || CLAVE === 'CAMBIA-ESTA-CLAVE' || req.key !== CLAVE) return json_({error:'clave'});
+    if(!CLAVE || CLAVE === 'CAMBIA-ESTA-CLAVE' || req.key !== CLAVE){
+      Utilities.sleep(2500);   // frena la fuerza bruta: cada intento fallido tarda 2.5 s
+      return json_({error:'clave'});
+    }
     const lock = LockService.getScriptLock();
     lock.waitLock(20000);
     try{ out = handle_(req); } finally { lock.releaseLock(); }

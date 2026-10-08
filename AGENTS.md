@@ -36,7 +36,8 @@ HTML, CSS y JS vive en ese archivo — sin build, sin framework, sin `package.js
 1. **Sin build ni dependencias nuevas.** Único recurso externo: Google Fonts.
 2. **Todo en el único archivo HTML** (más `apps-script/Code.gs` para el backend).
 3. **Cambios quirúrgicos**; colores solo vía variables CSS de tema.
-4. **No hardcodees datos personales, claves ni la URL /exec** en el repo.
+4. **No hardcodees datos personales ni claves.** La URL /exec del usuario SÍ está fija en `DEFAULT_CLOUD_URL` (decisión del usuario 2026-10-08; el repo es público, por eso la clave debe ser larga y Code.gs frena intentos fallidos).
+5b. PWA: `manifest.webmanifest`, `sw.js` (red primero, nunca cachea POST) e `icons/` son necesarios para instalar la app / generar el APK con PWABuilder. Sube `CACHE` en sw.js al cambiar el cascarón.
 5. Si cambias `Code.gs`, el usuario debe redesplegar: Implementar → Administrar
    implementaciones → Editar → Nueva versión (la URL no cambia).
 6. Haz copia en `versiones/` (ignorada por git) antes de cambios grandes.
