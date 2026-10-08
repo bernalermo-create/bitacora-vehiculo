@@ -135,6 +135,10 @@
   [data-theme="papel"] .overlay{background:rgba(40,36,30,.32);backdrop-filter:none;}
   [data-theme="papel"] .sheet{border-radius:0;}
   [data-theme="papel"] .toast{background:#000;color:#FFF8F1;border-color:#000;}
+  .welcome-steps{margin:0 0 14px;padding-left:20px;font-size:13.5px;line-height:1.5;color:var(--text-dim);}
+  .welcome-steps li{margin-bottom:9px;}
+  .welcome-steps b{color:var(--text);}
+  .welcome-note{font-size:12.5px;line-height:1.5;color:var(--text-dim);background:var(--panel-2);border:1px solid var(--line);border-radius:var(--radius-sm);padding:11px 13px;}
   .t-ring{display:contents;}
   /* Bento: claro, tarjetas azul-niebla de esquinas grandes, anillos de progreso, controles oscuros en píldora */
   [data-theme="bento"]{
@@ -727,12 +731,37 @@ async function pushState(baseRev){
   await tryPersist();
 }
 
+/* ---- Pantalla de bienvenida: solo en la primera apertura de una instalación nueva (sin datos propios ni nube) ---- */
+const WELCOME_KEY = 'bitacora-welcome';
+function welcomeSeen(){ try{ return localStorage.getItem(WELCOME_KEY)==='1'; }catch(e){ return true; } }
+function openWelcomeSheet(){
+  try{ localStorage.setItem(WELCOME_KEY,'1'); }catch(e){}
+  openSheet(`
+    <div class="sheet-handle"></div>
+    <h2 class="sheet-title">Bienvenido a tu Bitácora</h2>
+    <p class="hint-p">Lleva el control de los vencimientos y gastos de tu vehículo en tres pasos:</p>
+    <ol class="welcome-steps">
+      <li><b>Configura tu vehículo.</b> Toca el lápiz ✎ de arriba y escribe marca, modelo y kilometraje.</li>
+      <li><b>Programa tus servicios.</b> En cada tarjeta toca <i>Editar</i> y pon la próxima fecha o kilometraje. Verás cuenta regresiva y colores de aviso.</li>
+      <li><b>Anota lo que gastas.</b> Guarda el valor y la fecha de cada servicio; el botón <i>Gastos</i> te muestra el resumen.</li>
+    </ol>
+    <div class="welcome-note">🔒 <b>Tus datos se guardan solo en este teléfono.</b> Si desinstalas la app o borras sus datos, se pierden. Usa <i>Descargar copia</i> (al final de la lista) para respaldarlos, o conecta tu propia nube con el botón ☁.</div>
+    <div class="sheet-actions" style="flex-direction:column">
+      <button class="btn btn-primary" id="btnWelcomeStart">Empezar</button>
+      <button class="btn btn-ghost" id="btnWelcomeCloud">Ya tengo nube: conectar</button>
+    </div>
+  `);
+  document.getElementById('btnWelcomeStart').onclick = closeSheet;
+  document.getElementById('btnWelcomeCloud').onclick = openCloudSheet;
+}
+
 async function loadState(){
   const loaded = migrate(await tryGetSaved());
   state = loaded || seedState();
   if(!loaded) await tryPersist();
   render();
   if(cloud) syncNow();
+  else if(state.pristine && !welcomeSeen()) openWelcomeSheet();
 }
 async function saveState(){
   localVer++;

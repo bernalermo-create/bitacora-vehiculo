@@ -76,3 +76,8 @@ Opcionales, elegidos de styles.refero.design como inspiración (estilos de Tesla
 nombres propios, sin marcas ni imágenes). Showroom: blanco/gris + un solo azul #3E6AE1, radios 4–6px, plano.
 Medianoche: casi negro #08090A, bordes finos, un único acento lima #E4F222 (texto de botón oscuro), radios 8–12px.
 Ambos viven en `[data-theme="..."]` con variables + overrides, igual que Papel y Bento.
+
+## Pantalla de bienvenida (2026-10-08)
+`openWelcomeSheet()`: 3 pasos + aviso "tus datos se guardan solo en este teléfono". Sale UNA vez (flag
+`localStorage['bitacora-welcome']`) solo si la instalación es nueva (`state.pristine`) y no hay nube configurada;
+nunca a quien ya tiene datos propios. Botones: Empezar / "Ya tengo nube: conectar" (abre la hoja de nube).
