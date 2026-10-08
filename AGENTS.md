@@ -2,7 +2,7 @@
 
 Bitácora de mantenimiento de vehículos del usuario (Mazda 2 y otros): un único
 archivo HTML autocontenido (`Bitacora-Vehiculo.html`) con cuenta regresiva en
-vivo, recordatorios por fecha/kilometraje, gastos y 5 temas visuales (azul, esmeralda, amoled, claro, papel). Todo el
+vivo, recordatorios por fecha/kilometraje, gastos y 6 temas visuales (azul, esmeralda, amoled, claro, papel, bento). Todo el
 HTML, CSS y JS vive en ese archivo — sin build, sin framework, sin `package.json`.
 
 ## Arquitectura (desde 2026-10-08)
@@ -64,3 +64,9 @@ El usuario quitó los botones ".ics" y "Recordatorios" (y antes el de Google Cal
 Se eliminó todo el código de exportación a calendario. El campo `lastIcsSyncAt` sigue existiendo en el modelo
 y en Code.gs solo por compatibilidad con datos ya guardados; no se usa. Si se quieren avisos de vencimiento
 fuera de la app, la opción acordada es un disparador diario en Apps Script que envíe correo.
+
+## Tema "Bento" (2026-10-08)
+Inspirado en la guía de estilo "Bevel" de styles.refero.design (claro, tarjetas azul-niebla #EBF0F8, esquinas de 24px,
+anillos de progreso, controles oscuros en píldora #1F2025, acento #415EEE). Solo inspiración visual: nombre propio
+"Bento", sin marca ni imágenes de terceros. Los anillos de las 3 tarjetas de estado usan `.t-ring` (display:contents
+en los demás temas, así no cambian). Estados: rojo/ámbar/verde con tonos oscurecidos para contraste de texto.

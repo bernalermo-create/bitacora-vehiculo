@@ -1,5 +1,5 @@
 /* Service worker mínimo: deja abrir la app sin conexión (cascarón en caché). Las llamadas a Apps Script nunca se cachean. */
-const CACHE = 'bitacora-v10';
+const CACHE = 'bitacora-v11';
 const SHELL = ['./', './index.html', './manifest.webmanifest', './icons/icon-192.png', './icons/icon-512.png'];
 
 self.addEventListener('install', e => {

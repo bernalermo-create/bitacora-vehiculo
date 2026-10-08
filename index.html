@@ -135,6 +135,83 @@
   [data-theme="papel"] .overlay{background:rgba(40,36,30,.32);backdrop-filter:none;}
   [data-theme="papel"] .sheet{border-radius:0;}
   [data-theme="papel"] .toast{background:#000;color:#FFF8F1;border-color:#000;}
+  .t-ring{display:contents;}
+  /* Bento: claro, tarjetas azul-niebla de esquinas grandes, anillos de progreso, controles oscuros en píldora */
+  [data-theme="bento"]{
+    --bg:#FFFFFF;
+    --panel:#EBF0F8;
+    --panel-2:#F4F7FC;
+    --line:#DDE5F1;
+    --line-soft:#E8EEF7;
+    --text:#222326;
+    --text-dim:#5A5E64;
+    --text-faint:#6D7178;
+    --green:#12853B;
+    --green-dim:#DDF4E3;
+    --amber:#9C6200;
+    --amber-dim:#FFF1BF;
+    --red:#C93E27;
+    --red-dim:#FFE2DA;
+    --red-line:#FFC4B5;
+    --accent:#415EEE;
+    --accent-dim:#E0E6FD;
+    --accent-line:#C4CFFA;
+    --accent-rgb:65,94,238;
+    --accent-grad-1:#6A82F5;
+    --accent-grad-2:#415EEE;
+    --accent-ink:#FFFFFF;
+    --surface-deep:#FFFFFF;
+    --glow-1:#DCE8FB;
+    --radius:24px;
+    --radius-sm:16px;
+    --ink-btn:#1F2025;
+  }
+  [data-theme="bento"] body{font-family:-apple-system,BlinkMacSystemFont,'Inter','Segoe UI',sans-serif;letter-spacing:-.01em;}
+  [data-theme="bento"] .mono,[data-theme="bento"] .ch-time,[data-theme="bento"] .card-countdown,[data-theme="bento"] .tile .t-num,
+  [data-theme="bento"] .card-meta b,[data-theme="bento"] .odo-value,[data-theme="bento"] .radar-chip .rc-sub,[data-theme="bento"] .bh-top b{
+    font-family:-apple-system,BlinkMacSystemFont,'Inter','Segoe UI',sans-serif;font-variant-numeric:tabular-nums;}
+  [data-theme="bento"] .plate-title{font-size:28px;font-weight:600;letter-spacing:-.035em;line-height:1.05;}
+  [data-theme="bento"] .plate,[data-theme="bento"] .card,[data-theme="bento"] .tile,[data-theme="bento"] .countdown-hero,
+  [data-theme="bento"] .radar-chip,[data-theme="bento"] .odo{border-color:transparent;box-shadow:none;}
+  [data-theme="bento"] .plate,[data-theme="bento"] .countdown-hero{background:var(--panel);}
+  [data-theme="bento"] .plate::before{display:none;}
+  [data-theme="bento"] .countdown-hero.urgent{background:var(--red-dim);}
+  [data-theme="bento"] .card{background:var(--panel);}
+  [data-theme="bento"] .odo{background:#fff;border-radius:var(--radius-sm);}
+  [data-theme="bento"] .odo-value{font-weight:600;letter-spacing:-.03em;}
+  [data-theme="bento"] .dot{box-shadow:none !important;}
+  [data-theme="bento"] .card-badge{border-radius:999px;padding:4px 9px;}
+  [data-theme="bento"] .btn,[data-theme="bento"] .mini-btn,[data-theme="bento"] .export-btn,[data-theme="bento"] .filter-btn,
+  [data-theme="bento"] .veh-tab,[data-theme="bento"] .odo-edit,[data-theme="bento"] .icon-btn{border-radius:999px;}
+  [data-theme="bento"] .btn-primary,[data-theme="bento"] .odo-edit{background:var(--ink-btn);color:#fff;border-color:var(--ink-btn);}
+  [data-theme="bento"] .btn-ghost{background:var(--panel);border-color:transparent;color:var(--text);}
+  [data-theme="bento"] .btn-danger{background:var(--red-dim);border-color:transparent;color:var(--red);}
+  [data-theme="bento"] .icon-btn{background:#fff;border-color:transparent;color:var(--text-dim);}
+  [data-theme="bento"] .mini-btn{background:#fff;border-color:transparent;color:var(--text);}
+  [data-theme="bento"] .mini-btn.danger{background:var(--red-dim);color:var(--red);}
+  [data-theme="bento"] .export-btn{background:var(--panel);border-color:transparent;color:var(--text);}
+  [data-theme="bento"] .filter-btn,[data-theme="bento"] .veh-tab{background:transparent;border-color:var(--line);color:var(--text-dim);}
+  [data-theme="bento"] .plate .veh-tab{background:#fff;border-color:transparent;}
+  [data-theme="bento"] .filter-btn.active,[data-theme="bento"] .veh-tab.active,[data-theme="bento"] .plate .veh-tab.active{background:var(--ink-btn);border-color:var(--ink-btn);color:#fff;}
+  [data-theme="bento"] .fab{background:var(--ink-btn);color:#fff;box-shadow:0 10px 24px rgba(31,32,37,.28);}
+  [data-theme="bento"] .field input,[data-theme="bento"] .field textarea,[data-theme="bento"] .field select{border-radius:14px;}
+  [data-theme="bento"] .sheet{background:#fff;border-color:transparent;border-radius:28px 28px 0 0;}
+  [data-theme="bento"] .overlay{background:rgba(31,32,37,.38);backdrop-filter:none;}
+  [data-theme="bento"] .toast{background:var(--ink-btn);color:#fff;border-color:var(--ink-btn);}
+  [data-theme="bento"] .bv-bar,[data-theme="bento"] .bh-fill{background:var(--accent);border-radius:8px 8px 0 0;}
+  [data-theme="bento"] .bh-fill{border-radius:99px;}
+  [data-theme="bento"] .tile{border-radius:var(--radius);padding:14px 6px 12px;}
+  [data-theme="bento"] .tile .t-label{font-weight:600;}
+  [data-theme="bento"] .t-ring{
+    display:flex;align-items:center;justify-content:center;position:relative;width:54px;height:54px;margin:0 auto 6px;border-radius:50%;
+    background:conic-gradient(var(--ring,var(--accent)) calc(var(--p,0) * 1%), rgba(31,32,37,.09) 0);
+  }
+  [data-theme="bento"] .t-ring::before{content:"";position:absolute;inset:6px;border-radius:50%;background:var(--panel);}
+  [data-theme="bento"] .t-ring .t-num{position:relative;font-size:17px;}
+  [data-theme="bento"] .tile.red{--ring:#FF8A6B;}
+  [data-theme="bento"] .tile.amber{--ring:#FFCA00;}
+  [data-theme="bento"] .tile.green{--ring:#31CE01;}
+  [data-theme="bento"] .tile.spend{display:flex;flex-direction:column;justify-content:center;}
   *{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
   html,body{margin:0;padding:0;background:var(--bg);color:var(--text);}
   body{
@@ -406,6 +483,7 @@ const THEMES = [
   {id:'amoled', name:'AMOLED Negro', colors:['#000000','#57C7FF','#0A0A0A']},
   {id:'claro', name:'Claro', colors:['#F3F5F7','#0B84C4','#FFFFFF']},
   {id:'papel', name:'Papel', colors:['#FFF8F1','#0060E0','#E2E8F0']},
+  {id:'bento', name:'Bento', colors:['#FFFFFF','#415EEE','#EBF0F8']},
 ];
 function getTheme(){ try{ return localStorage.getItem('bitacora-theme')||'azul'; }catch(e){ return 'azul'; } }
 function setTheme(id){
@@ -873,6 +951,7 @@ function render(){
   const evaluated = curRecs().map(r=>({r, ev:computeEstado(r)}));
   const counts = {vencido:0, por_vencer:0, al_dia:0, sin_programar:0};
   let totalGastado = 0;
+  const ringPct = n => { const t = counts.vencido+counts.por_vencer+counts.al_dia+counts.sin_programar; return t ? Math.round(n/t*100) : 0; };
   evaluated.forEach(({r,ev})=>{ counts[ev.status]++; if(r.valor) totalGastado += Number(r.valor); });
 
   // radar: top urgent (vencido + por_vencer), sorted
@@ -935,9 +1014,9 @@ function render(){
     </div>
 
     <div class="tiles">
-      <div class="tile red"><div class="t-num mono">${counts.vencido}</div><div class="t-label">Vencidos</div></div>
-      <div class="tile amber"><div class="t-num mono">${counts.por_vencer}</div><div class="t-label">Por vencer</div></div>
-      <div class="tile green"><div class="t-num mono">${counts.al_dia}</div><div class="t-label">Al día</div></div>
+      <div class="tile red"><div class="t-ring" style="--p:${ringPct(counts.vencido)}"><div class="t-num mono">${counts.vencido}</div></div><div class="t-label">Vencidos</div></div>
+      <div class="tile amber"><div class="t-ring" style="--p:${ringPct(counts.por_vencer)}"><div class="t-num mono">${counts.por_vencer}</div></div><div class="t-label">Por vencer</div></div>
+      <div class="tile green"><div class="t-ring" style="--p:${ringPct(counts.al_dia)}"><div class="t-num mono">${counts.al_dia}</div></div><div class="t-label">Al día</div></div>
       <div class="tile spend"><div class="t-num mono">${fmtCOP(totalGastado)}</div><div class="t-label">Gastado</div></div>
     </div>
 
