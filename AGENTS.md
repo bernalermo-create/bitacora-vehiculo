@@ -58,3 +58,9 @@ adaptado a app móvil: acento #0060E0 (algo más oscuro que #006eff para contras
 peso normal (no 300), rojo/verde/ámbar de estado conservados porque son funcionales, fuentes libres
 (Inter + Cormorant Garamond) en lugar de las comerciales Editorial New / Founders Grotesk. No copiar marca ni
 ilustraciones de "Drive Capital". Se define con `[data-theme="papel"]` (variables + bloque de overrides).
+
+## Sin exportación .ics (2026-10-08)
+El usuario quitó los botones ".ics" y "Recordatorios" (y antes el de Google Calendar): no los necesita.
+Se eliminó todo el código de exportación a calendario. El campo `lastIcsSyncAt` sigue existiendo en el modelo
+y en Code.gs solo por compatibilidad con datos ya guardados; no se usa. Si se quieren avisos de vencimiento
+fuera de la app, la opción acordada es un disparador diario en Apps Script que envíe correo.
