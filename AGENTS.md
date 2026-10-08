@@ -7,8 +7,8 @@ HTML, CSS y JS vive en ese archivo — sin build, sin framework, sin `package.js
 
 ## Arquitectura (desde 2026-10-08)
 
-- **Frontend**: `Bitacora-Vehiculo.html` (`index.html` solo redirige a él para
-  GitHub Pages). Publicado en GitHub Pages del repo `bernalermo-create/bitacora-vehiculo`.
+- **Frontend**: `index.html` (`Bitacora-Vehiculo.html` solo redirige a él; antes era al revés,
+  PWABuilder/Play necesitan la app en la raíz). Publicado en GitHub Pages del repo `bernalermo-create/bitacora-vehiculo`.
 - **Backend**: `apps-script/Code.gs`, Google Apps Script *container-bound* a una
   hoja de Google ("Bitácora Vehículo"). Pestañas `Vehiculos`, `Servicios`
   (fuente de verdad, legibles/editables a mano) y `Config` (rev, nextId…).

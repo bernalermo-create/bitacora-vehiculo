@@ -1,6 +1,6 @@
 /* Service worker mínimo: deja abrir la app sin conexión (cascarón en caché). Las llamadas a Apps Script nunca se cachean. */
-const CACHE = 'bitacora-v3';
-const SHELL = ['./Bitacora-Vehiculo.html', './manifest.webmanifest', './icons/icon-192.png', './icons/icon-512.png'];
+const CACHE = 'bitacora-v4';
+const SHELL = ['./', './index.html', './manifest.webmanifest', './icons/icon-192.png', './icons/icon-512.png'];
 
 self.addEventListener('install', e => {
   e.waitUntil(caches.open(CACHE).then(c => c.addAll(SHELL)).then(() => self.skipWaiting()));
@@ -17,6 +17,6 @@ self.addEventListener('fetch', e => {
       const copy = res.clone();
       caches.open(CACHE).then(c => c.put(req, copy));
       return res;
-    }).catch(() => caches.match(req).then(r => r || caches.match('./Bitacora-Vehiculo.html')))
+    }).catch(() => caches.match(req).then(r => r || caches.match('./')))
   );
 });

@@ -3,7 +3,7 @@
   "short_name": "Bitácora",
   "description": "Mantenimiento, vencimientos y gastos de tus vehículos.",
   "lang": "es",
-  "start_url": "./Bitacora-Vehiculo.html",
+  "start_url": "./",
   "scope": "./",
   "display": "standalone",
   "orientation": "portrait",
