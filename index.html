@@ -505,7 +505,8 @@ function adoptCloud(j){
   setDirty(false);
   return tryPersist().then(()=>render());
 }
-function scheduleSync(){ clearTimeout(syncTimer); syncTimer = setTimeout(syncNow, 800); }
+let lastSyncAt = 0;
+function scheduleSync(){ clearTimeout(syncTimer); syncTimer = setTimeout(syncNow, 400); }
 
 async function syncNow(){
   if(!cloud) return;
@@ -514,6 +515,11 @@ async function syncNow(){
   try{
     do{
       resync = false;
+      // ruta rápida: con cambios locales y revisión conocida se sube directo (1 viaje en vez de 2); si hay conflicto el servidor lo avisa
+      if(isDirty() && state.rev > 0 && !state.pristine){
+        await pushState(state.rev);
+        continue;
+      }
       const j = await api('get');
       if(!j.state){
         if(state.pristine) break;   // instalación vacía con datos de plantilla: nunca subirla a una nube vacía
@@ -531,8 +537,8 @@ async function syncNow(){
     setSync('ok');
   }catch(e){
     console.error('sync', e);
-    setSync(e.code==='clave' ? 'badkey' : (isDirty() ? 'pending' : 'error'));
-  }finally{ syncing = false; }
+    if(e.code !== 'conflict') setSync(e.code==='clave' ? 'badkey' : (isDirty() ? 'pending' : 'error'));
+  }finally{ syncing = false; lastSyncAt = Date.now(); }
 }
 async function pushState(baseRev){
   const ver = localVer;
@@ -575,7 +581,7 @@ function updateSaveIndicator(){
   el.innerHTML = `<span class="dot ${dot}" style="box-shadow:none"></span> ${txt}`;
   el.onclick = ()=> syncState==='conflict' && cloud ? syncNow() : openCloudSheet();
 }
-document.addEventListener('visibilitychange', ()=>{ if(!document.hidden && cloud) syncNow(); });
+document.addEventListener('visibilitychange', ()=>{ if(!document.hidden && cloud && Date.now()-lastSyncAt > 20000) syncNow(); });
 window.addEventListener('online', ()=>{ if(cloud) syncNow(); });
 
 /* ---- Conexión a la nube (UI) ---- */

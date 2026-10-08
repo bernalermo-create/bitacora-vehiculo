@@ -76,7 +76,7 @@ function readCfg_(){
 }
 function writeCfg_(cfg){
   const sh = sheet_('Config');
-  sh.clear();
+  sh.clearContents();
   const rows = Object.keys(cfg).map(k=>[k, cfg[k]]);
   if(rows.length) sh.getRange(1,1,rows.length,2).setValues(rows);
 }
@@ -110,14 +110,25 @@ function readTable_(sh, cols){
   return out;
 }
 
-function writeTable_(sh, cols, labels, rows){
-  const total = Math.max(rows.length, 1);
-  sh.clear();
-  const textCols = cols.map(c=> NUM_COLS.indexOf(c) < 0);
-  sh.getRange(1,1,1,cols.length).setValues([labels]).setFontWeight('bold').setBackground('#e8f0fe');
-  sh.setFrozenRows(1);
+function ensureSheet_(name, labels){
+  const sh = sheet_(name);
+  if(sh.getRange(1,1).getValue() !== labels[0]){   // hoja nueva o vacía: encabezado una sola vez
+    sh.getRange(1,1,1,labels.length).setValues([labels]).setFontWeight('bold').setBackground('#e8f0fe');
+    sh.setFrozenRows(1);
+  }
+  return sh;
+}
+
+// Rápido: 1 limpieza + 1 formato + 1 escritura por tabla (antes eran decenas de llamadas)
+function writeTable_(sh, cols, rows){
+  const prev = Math.max(sh.getLastRow() - 1, 0);
+  if(prev > 0) sh.getRange(2,1,prev,cols.length).clearContent();
   // texto plano en columnas no numéricas: evita que Sheets convierta fechas o interprete "=..." como fórmula
-  cols.forEach((c,i)=>{ if(textCols[i]) sh.getRange(2,i+1,total,1).setNumberFormat('@'); });
+  const fmtRow = cols.map(c=> NUM_COLS.indexOf(c) < 0 ? '@' : 'General');
+  const nFmt = Math.max(prev, rows.length) + 50;
+  const fmts = [];
+  for(let i=0;i<nFmt;i++) fmts.push(fmtRow);
+  sh.getRange(2,1,nFmt,cols.length).setNumberFormats(fmts);
   if(rows.length){
     const data = rows.map(r=> cols.map(c=>{
       const v = r[c];
@@ -125,6 +136,12 @@ function writeTable_(sh, cols, labels, rows){
     }));
     sh.getRange(2,1,data.length,cols.length).setValues(data);
   }
+}
+
+// Revisión actual sin leer las tablas completas
+function currentRev_(){
+  if(sheet_('Vehiculos').getLastRow() < 2) return 0;
+  return Number(readCfg_().rev) || 0;
 }
 
 function readAll_(){
@@ -149,15 +166,15 @@ function save_(req){
   const s = req.state;
   if(!s || !Array.isArray(s.vehicles) || !Array.isArray(s.records) || !s.vehicles.length) throw new Error('datos inválidos');
   if(s.records.length > MAX_RECORDS) throw new Error('demasiados registros');
-  const cur = readAll_();
-  if(Number(req.baseRev) !== cur.rev) return {conflict:true, rev:cur.rev, state:cur.state};
-  writeTable_(sheet_('Vehiculos'), VEH_COLS, VEH_LABELS, s.vehicles);
-  writeTable_(sheet_('Servicios'), REC_COLS, REC_LABELS, s.records);
-  const rev = cur.rev + 1;
+  const cur = currentRev_();
+  if(Number(req.baseRev) !== cur){
+    const all = readAll_();
+    return {conflict:true, rev:all.rev, state:all.state};
+  }
+  writeTable_(ensureSheet_('Vehiculos', VEH_LABELS), VEH_COLS, s.vehicles);
+  writeTable_(ensureSheet_('Servicios', REC_LABELS), REC_COLS, s.records);
+  const rev = cur + 1;
   writeCfg_({rev:rev, nextId:s.nextId || '', nextVid:s.nextVid || '', lastIcsSyncAt:s.lastIcsSyncAt || '', actualizado:new Date().toISOString()});
-  const ss = SpreadsheetApp.getActive();
-  const first = ss.getSheets()[0];
-  if(first && first.getName() !== 'Vehiculos') ss.setActiveSheet(sheet_('Vehiculos'));
   return {ok:true, rev:rev};
 }
 
