@@ -516,6 +516,7 @@ async function syncNow(){
       resync = false;
       const j = await api('get');
       if(!j.state){
+        if(state.pristine) break;   // instalación vacía con datos de plantilla: nunca subirla a una nube vacía
         await pushState(0);
       } else if(!isDirty()){
         const incoming = migrate(j.state); incoming.rev = j.rev;

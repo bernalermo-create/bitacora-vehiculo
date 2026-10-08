@@ -1,3 +1,8 @@
 versiones/
 *.ics
 backup-bitacora-vehiculo-*.json
+Bitácora*Google Play package.zip
+*.keystore
+*.jks
+signing*
+*.zip
