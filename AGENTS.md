@@ -2,7 +2,7 @@
 
 Bitácora de mantenimiento de vehículos del usuario (Mazda 2 y otros): un único
 archivo HTML autocontenido (`Bitacora-Vehiculo.html`) con cuenta regresiva en
-vivo, recordatorios por fecha/kilometraje, gastos y 6 temas visuales (azul, esmeralda, amoled, claro, papel, bento). Todo el
+vivo, recordatorios por fecha/kilometraje, gastos y 8 temas visuales (azul, esmeralda, amoled, claro, papel, bento, showroom, medianoche). Todo el
 HTML, CSS y JS vive en ese archivo — sin build, sin framework, sin `package.json`.
 
 ## Arquitectura (desde 2026-10-08)
@@ -70,3 +70,9 @@ Inspirado en la guía de estilo "Bevel" de styles.refero.design (claro, tarjetas
 anillos de progreso, controles oscuros en píldora #1F2025, acento #415EEE). Solo inspiración visual: nombre propio
 "Bento", sin marca ni imágenes de terceros. Los anillos de las 3 tarjetas de estado usan `.t-ring` (display:contents
 en los demás temas, así no cambian). Estados: rojo/ámbar/verde con tonos oscurecidos para contraste de texto.
+
+## Temas "Showroom" y "Medianoche" (2026-10-08)
+Opcionales, elegidos de styles.refero.design como inspiración (estilos de Tesla y Linear; solo paleta/estructura,
+nombres propios, sin marcas ni imágenes). Showroom: blanco/gris + un solo azul #3E6AE1, radios 4–6px, plano.
+Medianoche: casi negro #08090A, bordes finos, un único acento lima #E4F222 (texto de botón oscuro), radios 8–12px.
+Ambos viven en `[data-theme="..."]` con variables + overrides, igual que Papel y Bento.

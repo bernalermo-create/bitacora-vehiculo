@@ -212,6 +212,60 @@
   [data-theme="bento"] .tile.amber{--ring:#FFCA00;}
   [data-theme="bento"] .tile.green{--ring:#31CE01;}
   [data-theme="bento"] .tile.spend{display:flex;flex-direction:column;justify-content:center;}
+  /* Showroom: blanco/gris con un solo azul para las acciones, plano y sobrio (inspirado en estilos de sitios de autos) */
+  [data-theme="showroom"]{
+    --bg:#FFFFFF; --panel:#F4F4F4; --panel-2:#EAEAEA; --line:#D9DADB; --line-soft:#E6E7E8;
+    --text:#171A20; --text-dim:#393C41; --text-faint:#5C5E62;
+    --green:#1A7F37; --green-dim:#E2F3E6; --amber:#8F5B00; --amber-dim:#FFF0CC; --red:#C0392B; --red-dim:#FDEAE7; --red-line:#F2BDB6;
+    --accent:#3E6AE1; --accent-dim:#E8EEFC; --accent-line:#3E6AE1; --accent-rgb:62,106,225;
+    --accent-grad-1:#3E6AE1; --accent-grad-2:#3E6AE1; --accent-ink:#FFFFFF; --surface-deep:#FFFFFF; --glow-1:#FFFFFF;
+    --radius:6px; --radius-sm:4px;
+  }
+  [data-theme="showroom"] body{font-family:-apple-system,BlinkMacSystemFont,'Inter','Segoe UI',sans-serif;letter-spacing:-.005em;}
+  [data-theme="showroom"] .mono,[data-theme="showroom"] .ch-time,[data-theme="showroom"] .card-countdown,[data-theme="showroom"] .tile .t-num,
+  [data-theme="showroom"] .card-meta b,[data-theme="showroom"] .odo-value,[data-theme="showroom"] .radar-chip .rc-sub,[data-theme="showroom"] .bh-top b{
+    font-family:-apple-system,BlinkMacSystemFont,'Inter','Segoe UI',sans-serif;font-variant-numeric:tabular-nums;}
+  [data-theme="showroom"] .plate-title{font-size:26px;font-weight:500;letter-spacing:-.02em;}
+  [data-theme="showroom"] .plate,[data-theme="showroom"] .countdown-hero,[data-theme="showroom"] .countdown-hero.urgent,[data-theme="showroom"] .card,
+  [data-theme="showroom"] .tile,[data-theme="showroom"] .radar-chip{background:var(--panel);border-color:transparent;box-shadow:none;}
+  [data-theme="showroom"] .countdown-hero.urgent{background:var(--red-dim);}
+  [data-theme="showroom"] .plate::before{display:none;}
+  [data-theme="showroom"] .odo{background:#fff;border-color:var(--line);}
+  [data-theme="showroom"] .dot{box-shadow:none !important;}
+  [data-theme="showroom"] .btn,[data-theme="showroom"] .mini-btn,[data-theme="showroom"] .export-btn,[data-theme="showroom"] .filter-btn,
+  [data-theme="showroom"] .veh-tab,[data-theme="showroom"] .odo-edit,[data-theme="showroom"] .icon-btn{border-radius:4px;}
+  [data-theme="showroom"] .btn-primary,[data-theme="showroom"] .odo-edit{background:var(--accent);color:#fff;border-color:var(--accent);}
+  [data-theme="showroom"] .btn-ghost,[data-theme="showroom"] .mini-btn,[data-theme="showroom"] .icon-btn,[data-theme="showroom"] .export-btn{background:#fff;border:1px solid var(--line);color:var(--text);}
+  [data-theme="showroom"] .mini-btn.danger{color:var(--red);border-color:var(--red-line);}
+  [data-theme="showroom"] .filter-btn,[data-theme="showroom"] .veh-tab{background:#fff;border-color:var(--line);color:var(--text-dim);}
+  [data-theme="showroom"] .filter-btn.active,[data-theme="showroom"] .veh-tab.active{background:var(--accent);border-color:var(--accent);color:#fff;}
+  [data-theme="showroom"] .fab{background:var(--accent);color:#fff;box-shadow:none;}
+  [data-theme="showroom"] .sheet{background:#fff;}
+  [data-theme="showroom"] .overlay{background:rgba(23,26,32,.35);backdrop-filter:none;}
+  [data-theme="showroom"] .toast{background:#171A20;color:#fff;border-color:#171A20;}
+  [data-theme="showroom"] .bv-bar,[data-theme="showroom"] .bh-fill{background:var(--accent);}
+
+  /* Medianoche: casi negro, bordes finos, planos, un solo acento verde-lima (inspirado en herramientas de producto) */
+  [data-theme="medianoche"]{
+    --bg:#08090A; --panel:#0F1011; --panel-2:#161718; --line:#23252A; --line-soft:#1A1C1F;
+    --text:#F2F3F4; --text-dim:#8A8F98; --text-faint:#70747C;
+    --green:#27A644; --green-dim:#10291A; --amber:#F0B429; --amber-dim:#2E2410; --red:#EB5757; --red-dim:#2E1415; --red-line:#4A2224;
+    --accent:#E4F222; --accent-dim:#1B1E08; --accent-line:#3F4511; --accent-rgb:228,242,34;
+    --accent-grad-1:#E4F222; --accent-grad-2:#E4F222; --accent-ink:#08090A; --surface-deep:#000000; --glow-1:#0B0C0D;
+    --radius:12px; --radius-sm:8px;
+  }
+  [data-theme="medianoche"] body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;letter-spacing:-.015em;}
+  [data-theme="medianoche"] .plate-title{font-size:24px;font-weight:500;letter-spacing:-.025em;}
+  [data-theme="medianoche"] .plate,[data-theme="medianoche"] .countdown-hero,[data-theme="medianoche"] .card,[data-theme="medianoche"] .tile{background:var(--panel);box-shadow:none;}
+  [data-theme="medianoche"] .plate::before{display:none;}
+  [data-theme="medianoche"] .countdown-hero.urgent{background:var(--red-dim);}
+  [data-theme="medianoche"] .dot{box-shadow:none !important;}
+  [data-theme="medianoche"] .btn,[data-theme="medianoche"] .mini-btn,[data-theme="medianoche"] .export-btn,[data-theme="medianoche"] .filter-btn,
+  [data-theme="medianoche"] .veh-tab,[data-theme="medianoche"] .odo-edit,[data-theme="medianoche"] .icon-btn{border-radius:8px;}
+  [data-theme="medianoche"] .btn-primary{background:var(--accent);color:var(--accent-ink);}
+  [data-theme="medianoche"] .fab{background:var(--accent);color:var(--accent-ink);box-shadow:none;}
+  [data-theme="medianoche"] .overlay{background:rgba(0,0,0,.6);backdrop-filter:none;}
+  [data-theme="medianoche"] .bv-bar,[data-theme="medianoche"] .bh-fill{background:var(--accent);}
   *{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
   html,body{margin:0;padding:0;background:var(--bg);color:var(--text);}
   body{
@@ -484,6 +538,8 @@ const THEMES = [
   {id:'claro', name:'Claro', colors:['#F3F5F7','#0B84C4','#FFFFFF']},
   {id:'papel', name:'Papel', colors:['#FFF8F1','#0060E0','#E2E8F0']},
   {id:'bento', name:'Bento', colors:['#FFFFFF','#415EEE','#EBF0F8']},
+  {id:'showroom', name:'Showroom', colors:['#FFFFFF','#3E6AE1','#F4F4F4']},
+  {id:'medianoche', name:'Medianoche', colors:['#08090A','#E4F222','#0F1011']},
 ];
 function getTheme(){ try{ return localStorage.getItem('bitacora-theme')||'azul'; }catch(e){ return 'azul'; } }
 function setTheme(id){
